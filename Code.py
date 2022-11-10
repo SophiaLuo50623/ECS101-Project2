@@ -49,46 +49,34 @@ def exploreOnly():
     print(happiness)
 
 def eGreedy(e = 10):
-    c1 = []
-    c2 = []
-    c3 = []
     averages = []
-
-    cafeteria1 = random.normalvariate(10, 8)
-    cafeteria2 = random.normalvariate(15, 6)
-    cafeteria3 = random.normalvariate(12, 5)
-    happiness = 0
-
-    happiness += random.normalvariate(10, 8) + random.normalvariate(15, 6) + random.normalvariate(12, 5)
-
-
-    c1.append(cafeteria1)
-    c2.append(cafeteria2)
-    c3.append(cafeteria3)
+    cafeteria1 = [random.normalvariate(10, 8)]
+    cafeteria2 = [random.normalvariate(15, 6)]
+    cafeteria3 = [random.normalvariate(12, 5)]
 
     for x in range(297):
         r = random.random()
         if r < (e / 100):
             i = random.randint(1, 3)
             if i == 1:
-                c1.append(random.normalvariate(10, 8))
+                cafeteria1.append(random.normalvariate(10, 8))
             elif i == 2:
-                c2.append(random.normalvariate(15, 6))
+                cafeteria2.append(random.normalvariate(15, 6))
             else:
-                c3.append(random.normalvariate(12, 5))
+                cafeteria3.append(random.normalvariate(12, 5))
 
         else:
-            average = sum(c1) / len(c1)
+            average = sum(cafeteria1) / len(cafeteria1)
             averages.append(average)
-            average2 = sum(c2) / len(c2)
+            average2 = sum(cafeteria2) / len(cafeteria2)
             averages.append(average2)
-            average3 = sum(c3) / len(c3)
+            average3 = sum(cafeteria3) / len(cafeteria3)
             averages.append(average3)
 
-            best = max(averages)
-            happiness += best
+            best_so_far = max(averages)
 
-    return happiness
+    return sum(cafeteria1) + sum(cafeteria2) + sum(cafeteria3) + best_so_far
 
-
+result = eGreedy()
+print(result)
 
