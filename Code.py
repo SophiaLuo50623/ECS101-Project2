@@ -6,7 +6,9 @@ import random
 def exploitOnly():
     happiness = 0
     cafeterias = []
-    cafeterias.append(random.normalvariate(10, 8))
+
+    cafeteria1 = random.normalvariate(10, 8)
+    cafeterias.append(cafeteria1)
 
     happiness += random.normalvariate(10, 8)
 
@@ -47,36 +49,44 @@ def exploreOnly():
     print(happiness)
 
 def eGreedy(e = 10):
-    cafeterias = []
+    c1 = []
+    c2 = []
+    c3 = []
+    averages = []
     happiness = 0
 
     cafeteria1 = random.normalvariate(10, 8)
     cafeteria2 = random.normalvariate(15, 6)
     cafeteria3 = random.normalvariate(12, 5)
 
-
-    cafeterias.append(cafeteria1)
-    cafeterias.append(cafeteria2)
-    cafeterias.append(cafeteria3)
-
-    best = max(cafeterias)
+    c1.append(cafeteria1)
+    c2.append(cafeteria2)
+    c3.append(cafeteria3)
 
     for x in range(297):
-
         r = random.random()
-        if r < (e/100):
-            i = random.randint(1,3)
-
+        if r < (e / 100):
+            i = random.randint(1, 3)
             if i == 1:
-                happiness += random.normalvariate(10, 8)
+                c1.append(random.normalvariate(10, 8))
             elif i == 2:
-                happiness += random.normalvariate(15, 6)
+                c2.append(random.normalvariate(15, 6))
             else:
-                happiness += random.normalvariate(12, 5)
-        else:
-            happiness += best
+                c3.append(random.normalvariate(12, 5))
 
-    return happiness
+        else:
+            average = sum(c1) / len(c1)
+            averages.append(average)
+            average2 = sum(c2) / len(c2)
+            averages.append(average2)
+            average3 = sum(c3) / len(c3)
+            averages.append(average3)
+
+            best = max(averages)
+
+            return average.index(best)
+
+
 
 
 
