@@ -36,7 +36,7 @@ def exploitOnly():
         for x in range(297):
             happiness += random.normalvariate(12, 5)
 
-    print(happiness)
+    return happiness
 
 def exploreOnly():
     happiness = 0
@@ -45,8 +45,7 @@ def exploreOnly():
         happiness += random.normalvariate(15, 6)
         happiness += random.normalvariate(12, 5)
 
-    # return happiness
-    print(happiness)
+    return happiness
 
 def eGreedy(e = 10):
     averages = []
@@ -77,6 +76,41 @@ def eGreedy(e = 10):
 
     return sum(cafeteria1) + sum(cafeteria2) + sum(cafeteria3) + best_so_far
 
-result = eGreedy()
-print(result)
+# result = eGreedy()
+# print(result)
+
+def simulation(t, e):
+    happiness_exploit = 0
+    happiness_explore = 0
+    happiness_egreedy = 0
+
+    for i in range (t):
+        happiness_exploit += exploitOnly()
+        happiness_explore += exploreOnly()
+        happiness_egreedy += eGreedy()
+
+    a_exploit = happiness_exploit/t
+    a_explore = happiness_explore/t
+    a_greedy = happiness_egreedy/t
+
+    expected_explore = 100*(10 + 15 + 12)
+    expected_exploit = 10 + 15 + 12 + 297 * 15
+    expected_greedy = e*10 + e*15 + e*12 + 300*((100-e)/100)*15
+
+    opt_happiness = 300*15
+    print("Optimum happiness:", opt_happiness)
+
+    print("Explore Only")
+    print("Expected:%d" % expected_explore,"\t Regret: %d" % (opt_happiness - expected_exploit))
+    print("Average: %d" % a_explore, "\t Regret: %d" % (opt_happiness - a_explore))
+
+    print("Exploit Only")
+    print("Expected: %d" % expected_exploit, "\t Regret: %d" % (opt_happiness-expected_exploit))
+    print("Average: %d" % a_exploit, "\t Regret: %d" % (opt_happiness-a_exploit))
+
+    print("eGreedy")
+    print("Expected:%d" % expected_greedy,"\t Regret: %d" % (opt_happiness-expected_greedy))
+    print("Average: %d" % a_greedy, "\t Regret: %d" % (opt_happiness-a_greedy))
+
+simulation(300, 10)
 
