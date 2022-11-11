@@ -57,12 +57,6 @@ def eGreedy(e = 10):
         r = random.random()
         if r < (e / 100):
             i = random.randint(1, 3)
-            if i == 1:
-                cafeteria1.append(random.normalvariate(10, 8))
-            elif i == 2:
-                cafeteria2.append(random.normalvariate(15, 6))
-            else:
-                cafeteria3.append(random.normalvariate(12, 5))
 
         else:
             average = sum(cafeteria1) / len(cafeteria1)
@@ -72,9 +66,16 @@ def eGreedy(e = 10):
             average3 = sum(cafeteria3) / len(cafeteria3)
             averages.append(average3)
 
-            best_so_far = max(averages)
+            i = averages.index(max(averages)) + 1
 
-    return sum(cafeteria1) + sum(cafeteria2) + sum(cafeteria3) + best_so_far
+        if i == 1:
+            cafeteria1.append(random.normalvariate(10, 8))
+        elif i == 2:
+            cafeteria2.append(random.normalvariate(15, 6))
+        else:
+            cafeteria3.append(random.normalvariate(12, 5))
+
+    return sum(cafeteria1) + sum(cafeteria2) + sum(cafeteria3)
 
 # result = eGreedy()
 # print(result)
