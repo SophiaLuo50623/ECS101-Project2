@@ -101,7 +101,7 @@ def simulation(t, e):
     print("Optimum happiness:", opt_happiness)
 
     print("Explore Only")
-    print("Expected:%d" % expected_explore,"\t Regret: %d" % (opt_happiness - expected_exploit))
+    print("Expected:%d" % expected_explore, "\t Regret: %d" % (opt_happiness - expected_exploit))
     print("Average: %d" % a_explore, "\t Regret: %d" % (opt_happiness - a_explore))
 
     print("Exploit Only")
